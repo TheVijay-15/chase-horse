@@ -559,20 +559,30 @@ with st.sidebar:
     """, unsafe_allow_html=True)
     st.divider()
     
-    uploaded = st.file_uploader("📂 Upload Excel File", type=['xlsx','xls'])
+    # ---- DATA LOADING ----
+    uploaded = st.file_uploader("📂 Upload Excel File (optional)", type=['xlsx','xls'])
     
-    if uploaded:
+    if uploaded is not None:
         df_all = load_and_clean(uploaded)
-        st.success(f"✅ {len(df_all):,} records loaded")
-        
+        st.success(f"{len(df_all):,} records loaded from upload")
+    else:
+        # Auto-load from repo
+        try:
+            df_all = load_and_clean("data/Freight_Reconcile_Final.xlsx")
+            st.success(f"{len(df_all):,} records auto-loaded")
+        except:
+            st.error("No data file found. Please upload an Excel file.")
+            df_all = None
+    
+    if df_all is not None:
         st.divider()
-        st.markdown("### 🎯 Filters")
+        st.markdown("### Filters")
         
         years = sorted(df_all['Year'].unique())
         sel_years = st.multiselect("Year", years, default=years)
         
         states_list = sorted([s for s in df_all['Origin state'].unique() if isinstance(s, str)])
-        sel_states = st.multiselect("State", states_list, default=states_list)
+        sel_states = st.multiselect("State", states_list, default=states_list[:3])
         
         df = df_all.copy()
         if sel_years:
