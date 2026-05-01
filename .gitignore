@@ -1,0 +1,10 @@
+# Virtual Environment (keep hidden - too large)
+venv/
+env/
+ENV/
+__pycache__/
+*.pyc
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
