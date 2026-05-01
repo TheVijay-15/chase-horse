@@ -3,6 +3,7 @@ CHASE HORSE | Freight Intelligence Command Center
 Streamlit Dashboard for Freight Rate Analysis - Final Version
 """
 import streamlit as st
+import base64
 import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
@@ -19,8 +20,8 @@ warnings.filterwarnings("ignore")
 # PAGE CONFIG
 # =============================================
 st.set_page_config(
-    page_title="CHASE HORSE | Freight Intelligence",
-    page_icon="🚛",
+    page_title="CHASE HORSE | Freight Vision Dashboard",
+    page_icon="⚡",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -549,10 +550,16 @@ def chart_correlation(df):
 # =============================================
 # SIDEBAR
 # =============================================
+# Load and encode the image
+logo_path = r"C:\Users\vijay\OneDrive\Desktop\chase_horse.png"
+with open(logo_path, "rb") as img_file:
+    b64_logo = base64.b64encode(img_file.read()).decode()
+
 with st.sidebar:
-    st.markdown("""
+    st.markdown(f"""
     <div style='text-align:center;padding:15px 0;'>
-        <div style='font-size:3em;'>🚛</div>
+        <img src="data:image/png;base64,{b64_logo}" 
+             style='width:100%; max-width:220px; height:auto; display:block; margin:0 auto 10px;'>
         <h2 style='color:#58a6ff;margin:5px 0;'>CHASE HORSE</h2>
         <p style='color:#8b949e;font-size:0.8em;'>Freight Intelligence</p>
     </div>
@@ -596,9 +603,18 @@ with st.sidebar:
 # =============================================
 # MAIN CONTENT
 # =============================================
-st.markdown("""
+# Load and encode the logo
+logo_path = r"C:\Users\vijay\OneDrive\Desktop\chase_horse.png"
+with open(logo_path, "rb") as img_file:
+    b64_logo = base64.b64encode(img_file.read()).decode()
+
+st.markdown(f"""
 <div style='display:flex;justify-content:space-between;align-items:center;padding:15px 0;'>
-    <h1 style='color:#e6edf3;margin:0;font-size:1.8em;'>🚛 Freight Command Center</h1>
+    <div style='display:flex;align-items:center;gap:12px;'>
+        <img src="data:image/png;base64,{b64_logo}" 
+             style='width:60px;height:60px;object-fit:contain;vertical-align:middle;'>
+        <h1 style='color:#e6edf3;margin:0;font-size:1.8em;'>Freight Vision Dashboard</h1>
+    </div>
     <span style='color:#3fb950;font-size:0.9em;'>● Live Dashboard</span>
 </div>
 """, unsafe_allow_html=True)
