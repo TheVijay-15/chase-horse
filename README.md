@@ -1,4 +1,4 @@
-# 🚛 CHASE HORSE | Freight Intelligence Command Center
+# CHASE HORSE | Freight rate Analyis and Forecasting r
 
 <div align="center">
 
